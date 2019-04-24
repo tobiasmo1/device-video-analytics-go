@@ -1,0 +1,79 @@
+[Service]
+Host = "172.17.0.1"
+Port = 49990
+ConnectRetries = 3
+HealthCheck = "/api/v1/ping"
+Labels = []
+OpenMsg = "Video Analytics Pipelines Device Service Started..."
+ReadMaxLimit = 256
+Timeout = 5000
+
+[Registry]
+Type = "consul"
+Host = "localhost"
+Port = 8500
+CheckInterval = "15s"
+FailLimit = 3
+FailWaitTime = 10
+
+[Clients]
+  [Clients.Data]
+  name = "edgex-core-data"
+  Protocol = "http"
+  Host = "localhost"
+  Port = 48080
+  Timeout = 50000
+
+  [Clients.Metadata]
+  name = "edgex-core-metadata"
+  Protocol = "http"
+  Host = "localhost"
+  Port = 48081
+  Timeout = 50000
+
+  [Clients.Logging]
+  Name = "edgex-support-logging"
+  Protocol = "http"
+  Host = "localhost"
+  Port = 48061
+
+[Device]
+  DataTransform = true
+  InitCmd = ""
+  InitCmd2 = "HandleReadCommands"
+  InitCmdArgs = ""
+  MaxCmdOps = 128
+  MaxCmdValueLen = 256
+  RemoveCmd = ""
+  RemoveCmdArgs = ""
+  ProfilesDir = "./res"
+  SendReadingsOnChanged = true
+
+[Writable]
+LogLevel = "INFO"
+
+[Logging]
+EnableRemote = false
+File = "./device-video-analytics-go-service.log"
+RemoteURL = ''
+
+# Pre-defined Devices - useful for tests or to populate static camera addresses (i.e., known at deployment time) to expedite their discovery
+[[DeviceList]]
+  Name = "MockVAPipeline003"
+  Profile = "video-analytics-pipelines"
+  Description = "Initial VA Pipeline 1 configured on service startup"
+  Labels = [ "object_detect", "all" ]
+  [DeviceList.Protocols]
+    [DeviceList.Protocols.other]
+    Address = "localhost/pipeline/object_detect"
+    Port = "8080"
+
+[[DeviceList]]
+  Name = "MockVAPipeline004"
+  Profile = "video-analytics-pipelines"
+  Description = "Initial VA Pipeline 2 configured on service startup"
+  Labels = [ "face_detect", "all" ]
+  [DeviceList.Protocols]
+    [DeviceList.Protocols.other]
+    Address = "localhost/pipeline/face_detect"
+    Port = "8080"

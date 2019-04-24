@@ -1,0 +1,108 @@
+name: "video-analytics-pipelines"
+manufacturer:  "www.intel.com"
+model: "EdgeX_VAPipelines"
+labels:
+    - "va-pipelines"
+description: "EdgeX device profile for VA Pipelines."
+deviceResources:
+    -
+        name: "pipeline_error"
+        description: "command error response"
+        properties:
+            value:
+                { type: "String", readWrite: "RW", defaultValue: "An Error Occurred"}
+            units:
+                { type: "String", readWrite: "R", defaultValue: "VAPipelineErrorString" }
+    -
+        name: "tags"
+        description: "pipeline device tags"
+        properties:
+            value:
+                { type: "String", readWrite: "RW", defaultValue: "key:value,key:value"}
+            units:
+                { type: "String", readWrite: "R", defaultValue: "Tags" }
+    -
+        name: "pipeline_command"
+        description: "pipeline device standards-based metadata"
+        properties:
+            value:
+                { type: "String", readWrite: "RW", defaultValue: "key:value,key:value"}
+            units:
+                { type: "String", readWrite: "R", defaultValue: "VAPipelineMetadata" }
+deviceCommands:
+    -
+        name: "pipeline_error"
+        get:
+            - { operation: "get", object: "pipeline_error", property: "value", parameter: "pipelinedevice_error" }
+        set:
+            - { operation: "set", object: "pipeline_error", property: "value", parameter: "pipelinedevice_error" }
+    -
+        name: "tags"
+        get:
+            - { operation: "get", object: "tags", property: "value", parameter: "pipelinedevice_tags" }
+        set:
+            - { operation: "set", object: "tags", property: "value", parameter: "pipelinedevice_tags" }
+    -
+        name: "tags"
+        get:
+            - { operation: "get", object: "tags", property: "value", parameter: "pipelinedevice_tags" }
+        set:
+            - { operation: "set", object: "tags", property: "value", parameter: "pipelinedevice_tags" }
+    -
+        name: "pipeline_command"
+        get:
+            - { operation: "get", object: "pipeline_command", property: "value", parameter: "vapipeline_metadata" }
+        set:
+            - { operation: "set", object: "pipeline_command", property: "value", parameter: "vapipeline_metadata" }
+
+coreCommands:
+  -
+    name: tags
+    get:
+        path: "/api/v1/device/{deviceId}/tags"
+        responses:
+          -
+            code: "200"
+            description: "Get Tags"
+            expectedValues: ["pipelinedevice_tags"]
+          -
+            code: "503"
+            description: "Get Tags Error"
+            expectedValues: ["pipelinedevice_error"]
+    put:
+        path: "/api/v1/device/{deviceId}/tags"
+        parameterNames: ["pipelinedevice_tags"]
+        responses:
+          -
+            code: "200"
+            description: "Set Tags"
+            expectedValues: ["pipelinedevice_id"]
+          -
+            code: "503"
+            description: "Set Tags Error"
+            expectedValues: ["pipelinedevice_error"]
+  -
+    name: pipeline_command
+    get:
+        path: "/api/v1/device/{deviceId}/pipeline_command"
+        responses:
+          -
+            code: "200"
+            description: "Get VA Pipeline Metadata"
+            expectedValues: ["vapipeline_metadata"]
+          -
+            code: "503"
+            description: "Get VA Pipeline Metadata Error"
+            expectedValues: ["pipelinedevice_error"]
+    put:
+        path: "/api/v1/device/{deviceId}/pipeline_command"
+        parameterNames: ["vapiopeline_metadata"]
+        responses:
+          -
+            code: "200"
+            description: "Set VA Pipeline Metadata"
+            expectedValues: ["vapipeline_metadata"]
+          -
+            code: "503"
+            description: "Set VA Pipeline Metadata Error"
+            expectedValues: ["pipelinedevice_error"]

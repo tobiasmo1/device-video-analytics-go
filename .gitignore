@@ -1,0 +1,10 @@
+/res/vainfocache.json
+/res/va-credentials.conf
+/res/archive
+/vendor
+/.idea
+*.xml
+*.log
+LintOutput.json
+device-video-analytics-go
+run
