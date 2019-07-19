@@ -1,18 +1,6 @@
-The following open source projects are referenced by Device Camera Go:
+The following open source projects are referenced by Device Video Analytics Go:
 
 https://golang.org/LICENSE
-
-atagirov/goonvif (MIT) https://github.com/atagirov/goonvif
-yakovlevdmv/goonvif (MIT) https://github.com/yakovlevdmv/goonvif
-https://github.com/yakovlevdmv/goonvif/blob/master/LICENSE
-
-Nested goonvif packages are not separately licensed:
-yakovlevdmv/goonvif/Device
-yakovlevdmv/goonvif/Media
-yakovlevdmv/goonvif/xsd/onvif
-yakovlevdmv/gosoap
-yakovlevdmv/WS-Discovery
-yakovlevdmv/Golang-iso8601-duration
 
 BurntSushi/toml 0.3.1 (MIT) https://github.com/BurntSushi/toml
 https://github.com/BurntSushi/toml/blob/master/COPYING
@@ -70,4 +58,3 @@ https://github.com/edgexfoundry/device-sdk-go/blob/master/LICENSE
 
 edgexfoundry/edgex-go (Apache 2.0) https://github.com/edgexfoundry/edgex-go
 https://github.com/edgexfoundry/edgex-go/blob/master/LICENSE
-
